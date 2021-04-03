@@ -23,6 +23,7 @@ namespace doublyLinkedList
 
     public class baseSentinel:Node,ISentinel
     {
+        //Instance constructors couldn't be inherited.
         public baseSentinel(int Invalue):base(Invalue)
         { }
     }
