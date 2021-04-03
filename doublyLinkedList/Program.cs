@@ -2,7 +2,7 @@
 
 namespace doublyLinkedList
 {
-     public class Node
+     public class Node:INode
     {
         internal Node Prev { get; set; }
         internal int Nvalue { get; set; }
@@ -16,23 +16,41 @@ namespace doublyLinkedList
         }
     }
 
+    public interface INode
+    {
+
+    }
+
     public interface ISentinel
     {
         
     }
 
-    public class baseSentinel:Node,ISentinel
+    public class baseSentinel:Node,ISentinel,INode
     {
         //Instance constructors couldn't be inherited.
         public baseSentinel(int Invalue):base(Invalue)
         { }
     }
 
+    public class SentinelFactory
+    {
+        public INode CreateSentinel()
+        {
+            return new baseSentinel(-1);
+        }
+    }
+
     public class DList
     {
         public DList()
         {
+            var fac = new SentinelFactory();
+            Top_Sentinel = (Node)fac.CreateSentinel();
+            Buttom_Sentinel = (Node)fac.CreateSentinel();
 
+            Top_Sentinel.Next = Buttom_Sentinel;
+            Buttom_Sentinel.Prev = Top_Sentinel;
         }
         internal Node Top_Sentinel { get; set; }
         internal Node Buttom_Sentinel { get; set; }
