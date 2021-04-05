@@ -58,7 +58,19 @@ namespace doublyLinkedList
 
     public static class DListExtension
     {
-        //static public void InsertNode(this DList dList,int )
+        static public void InsertNode(this DList dList,int newValue)
+        {
+            var curr=dList.Top_Sentinel;
+            while(curr.Next!=dList.Buttom_Sentinel)
+            {
+                curr=curr.Next;
+            }
+            var newNode=new Node(newValue);
+            newNode.Next=dList.Buttom_Sentinel;
+            dList.Buttom_Sentinel.Prev=newNode;
+            curr.Next=newNode;
+            newNode.Prev=curr;
+        }
     }
 
     class Program
@@ -66,7 +78,8 @@ namespace doublyLinkedList
         static void Main(string[] args)
         {
             var dlist = new DList();
-            var newNode = new Node(1000);
+            dlist.InsertNode(1000);
+            dlist.InsertNode(2000);
         }
     }
 }
